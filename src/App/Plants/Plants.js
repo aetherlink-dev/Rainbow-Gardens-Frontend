@@ -52,7 +52,7 @@ function Plants() {
       setLoading(true);
       if (plantsCategoryParams !== 'All') {
         try {
-          const response = await fetch(`${process.env.REACT_APP_BASE_URL}getproduct?category=${plantsCategoryParams}+Plant`);
+          const response = await fetch(`${process.env.REACT_APP_BASE_URL}/getproduct?category=${plantsCategoryParams}+Plant`);
           const data = await response.json();
           setPlantsData(data);
         } catch (e) {
