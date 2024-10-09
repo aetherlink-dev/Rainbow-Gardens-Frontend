@@ -30,7 +30,7 @@ export default function Navbar() {
             </NavLink>
 
             <NavLink
-              to="/category"
+              to="/plants/All"
               className={({ isActive }) =>
                 isActive ? "active" : "navbarContent"
               }

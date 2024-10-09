@@ -1,9 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import twitter from "../images/Twitter.svg";
 import ig from "../images/Ig.svg";
-import fb from "../images/FB.svg";
-import youTube from "../images/You tube.svg";
 import { NavLink } from "react-router-dom";
 import mail from "../images/Mail.svg";
 import location from "../images/Location.svg";
@@ -32,16 +29,15 @@ export default function Footer() {
           <div className="footerBottomLeftContent">
             <div className="footerContent">
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut.
+                flourish together get the plants makes you happy
               </span>
             </div>
 
             <div className="footerIconDiv">
-              <img src={twitter} alt="twitter" />
+              {/* <img src={twitter} alt="twitter" /> */}
               <img src={ig} alt="ig" />
-              <img src={fb} alt="fb" />
-              <img src={youTube} alt="youtube" />
+              {/* <img src={fb} alt="fb" /> */}
+              {/* <img src={youTube} alt="youtube" /> */}
             </div>
           </div>
         </div>
@@ -50,20 +46,8 @@ export default function Footer() {
           <div className="linkContainer">
             <span>Quick Links</span>
             <div className="linkContents">
-              <NavLink to="">
-                <span>Shop with us</span>
-              </NavLink>
-
-              <NavLink to="">
+              <NavLink to="/plants/All">
                 <span>All Plants</span>
-              </NavLink>
-
-              <NavLink to="">
-                <span>About us</span>
-              </NavLink>
-
-              <NavLink to="">
-                <span>Cart</span>
               </NavLink>
             </div>
           </div>
@@ -73,23 +57,23 @@ export default function Footer() {
             <div className="footerContactContents">
               <div className="footerContactContent">
                 <img src={mail} alt="mail" />
-                <span>hello@gmail.com</span>
+                <span>purakkat.rainbowgardens@gmail.com</span>
               </div>
 
               <div className="footerContactContent">
                 <img src={location} alt="mail" />
                 <span>
-                  Riverside building,County hall,
-                  <br />
-                  London SE1 7PB,
-                  <br />
-                  United Kingdom
+                Kumbalam South Junction 
+                <br />
+                Ernakulam, Kerala 
+                <br />
+                682506
                 </span>
               </div>
 
               <div className="footerContactContent">
                 <img src={phone} alt="mail" />
-                <span>451-484-5939</span>
+                <span>7012351551</span>
               </div>
             </div>
           </div>

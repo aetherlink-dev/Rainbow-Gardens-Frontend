@@ -12,23 +12,23 @@ export default function WhyChooseUs() {
           </div>
 
           <div className='whyChooseUsContent'>
-            <span>Sustainable Practices</span>
+            <span>Expertise and Quality Assurance</span>
             <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.
+            At Rainbow Gardens, our experienced horticulturists carefully cultivate and hand-pick plants to ensure exceptional quality and health. With years of expertise in plant care, we guarantee thriving plants that bring joy to your space.
             </p>
           </div>
 
           <div className='whyChooseUsContent'>
-            <span>Sustainable Practices</span>
+            <span>Unique and Diverse Plant Selection</span>
             <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.
+            Rainbow Gardens boasts an extensive collection of rare, exotic, and popular plant varieties, catering to diverse tastes and needs. From indoor plants to outdoor gardens, succulents to flowering plants, our nursery has something adorable.
             </p>
           </div>
 
           <div className='whyChooseUsContent'>
-            <span>Sustainable Practices</span>
+            <span>Personalized Customer Service and Support</span>
             <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.
+            Our dedicated team provides personalized guidance, expert advice, and after-sales support to ensure your plants flourish. Whether you're a seasoned gardener or a beginner, we're committed to helping you choose the perfect plants and providing ongoing care tips.
             </p>
           </div>
         </div>
