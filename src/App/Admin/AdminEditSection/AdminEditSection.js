@@ -6,7 +6,6 @@ import { fetchProducts } from '../../Redux/Slice/ProductSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 function AdminEditSection() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,13 +14,30 @@ function AdminEditSection() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
-  // Check if user is authenticated
+  // Check if user is authenticated and token is valid
   useEffect(() => {
     const token = localStorage.getItem('authToken');
+    
     if (!token) {
       navigate('/adminLogin'); // Redirect to login page if not authenticated
     } else {
-      dispatch(fetchProducts()); // Fetch products if authenticated
+      // Verify the token by sending a request
+      axios.get(`${process.env.REACT_APP_BASE_URL}/verifyToken`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(() => {
+        // If the token is valid, fetch the products
+        dispatch(fetchProducts());
+      })
+      .catch((error) => {
+        // If token is invalid or expired, remove it and redirect to login
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem('authToken');
+          navigate('/adminLogin');
+        }
+      });
     }
   }, [dispatch, navigate]);
 
@@ -52,11 +68,17 @@ function AdminEditSection() {
         .then((response) => {
           console.log(response);
           setShowDeleteConfirmation(false);
-          dispatch(fetchProducts());
+          dispatch(fetchProducts()); // Refetch the products after deletion
         })
         .catch((error) => {
-          console.error(error);
-          alert('Error deleting product. Please try again.');
+          // Handle error and check if it's due to an invalid or expired token
+          if (error.response && error.response.status === 401) {
+            localStorage.removeItem('authToken'); // Remove invalid token
+            navigate('/adminLogin'); // Redirect to login
+          } else {
+            console.error(error);
+            alert('Error deleting product. Please try again.');
+          }
         });
     }
   };

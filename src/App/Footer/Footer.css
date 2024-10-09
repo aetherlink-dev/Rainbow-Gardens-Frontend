@@ -13,6 +13,7 @@
   object-fit: cover;
   position: absolute;
   background: url("../images/FooterImage.svg");
+  z-index: -1;
   border-top-left-radius: 2.604vw;
   border-top-right-radius: 2.604vw;
   z-index: -1;
