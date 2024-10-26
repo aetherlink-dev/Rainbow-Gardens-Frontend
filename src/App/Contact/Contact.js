@@ -6,7 +6,6 @@ import phoneImg from '../images/PhoneImg.svg';
 import mailImg from '../images/MailImg.svg';
 import locationImg from '../images/LocationImg.svg';
 import igIcon from '../images/IgIcon.svg';
-import discordIcon from '../images/DiscordIcon.svg';
 import Footer from '../Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../Redux/Slice/ContactSlice';
@@ -88,24 +87,29 @@ export default function Contact() {
                 <div className='contactLeftMiddleDiv'>
                   <div className='contactLeftContent'>
                     <img src={phoneImg} alt='phoneImg'/>
-                    <span>+1012 3456 798</span>
+                    <span>7012351551</span>
                   </div>
 
                   <div className='contactLeftContent'>
                     <img src={mailImg} alt='phoneImg'/>
-                    <span>rainbowgardens@gmail.com</span>
+                    <span>purakkat.rainbowgardens@gmail.com</span>
                   </div>
 
                   <div className='contactLeftContent'>
                     <img src={locationImg} alt='phoneImg'/>
-                    <span>132 Dartmouth street Boston, Kumbalam 02156 Kerala</span>
+                    <span> Kumbalam South Junction 
+                           <br />
+                            Ernakulam, Kerala 
+                            <br />
+                            682506
+                    </span>
                   </div>
                 </div>
 
                 <div className='contactLeftIconDiv'>
                     <img src={igIcon} alt='igIcon'/>
-                    <img src={discordIcon} alt='discordIcon'/>
-                    <img src={discordIcon} alt='discordIcon'/>
+                    {/* <img src={discordIcon} alt='discordIcon'/>
+                    <img src={discordIcon} alt='discordIcon'/> */}
                 </div>
               </div>
 
