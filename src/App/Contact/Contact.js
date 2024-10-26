@@ -5,7 +5,6 @@ import Navbar from '../Navbar/Navbar';
 import phoneImg from '../images/PhoneImg.svg';
 import mailImg from '../images/MailImg.svg';
 import locationImg from '../images/LocationImg.svg';
-import igIcon from '../images/IgIcon.svg';
 import Footer from '../Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../Redux/Slice/ContactSlice';
@@ -104,12 +103,6 @@ export default function Contact() {
                             682506
                     </span>
                   </div>
-                </div>
-
-                <div className='contactLeftIconDiv'>
-                    // <img src={igIcon} alt='igIcon'/>
-                    {/* <img src={discordIcon} alt='discordIcon'/>
-                    <img src={discordIcon} alt='discordIcon'/> */}
                 </div>
               </div>
 
