@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Product.css";
 import NavbarWithBorder from "../Navbar/NavbarWithBorder";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
@@ -13,14 +13,22 @@ import { addProduct } from "../Redux/Slice/ProductSlice";
 export default function Product() {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const   productState = useSelector((state) => state.product);
+  const productState = useSelector((state) => state.product);
   const navigate = useNavigate();
+  
+  // State to track the currently selected main image
+  const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
     dispatch(fetchProductByPno(productId));
-  }, []);
+  }, [dispatch, productId]);
 
- 
+  // Set initial main image when product data is loaded
+  useEffect(() => {
+    if (productState.product?.images) {
+      setSelectedImage(productState.product.images[0]);
+    }
+  }, [productState.product]);
 
   return (
     <div className="product">
@@ -34,8 +42,23 @@ export default function Product() {
           <div className="productBottomContainer">
             <div className="productBottomLeftDiv">
               <div className="productImageContainer">
-                <img src={productState.product?.images?.[0]} alt="productImg" />
+                <img src={selectedImage} alt="Selected product" />
               </div>
+
+              {/* Thumbnail gallery for additional images */}
+            <div className="thumbnailDiv">
+              <div className="thumbnailGallery">
+                {productState.product?.images?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Thumbnail ${index + 1}`}
+                    className={`thumbnailImage ${image === selectedImage ? "active" : ""}`}
+                    onClick={() => setSelectedImage(image)}
+                  />
+                ))}
+              </div>
+             </div>
             </div>
 
             <div className="productBottomRightDiv">
@@ -79,8 +102,6 @@ export default function Product() {
                 <div className="productLongDescriptionDiv">
                   <span>{productState.product?.plantLongDescription}</span>
                 </div>
-
-               
               </div>
             </div>
           </div>
