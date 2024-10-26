@@ -554,7 +554,7 @@
 
   .plantCardImageContainer {
     min-width: 100%;
-    min-height: 30dvh;
-    height: auto;
+    min-height: 20dvh;
+    height: 40vh;
   }
 }
