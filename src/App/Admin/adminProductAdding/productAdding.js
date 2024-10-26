@@ -4,7 +4,9 @@ import Footer from '../../Footer/Footer';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./productAdding.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "./productAdding.css";
 
 export default function ProductAdding() {
   const navigate = useNavigate();
@@ -25,15 +27,20 @@ export default function ProductAdding() {
     plantThirdImage: null
   });
 
-  // Check if user is authenticated
+  const [previewImages, setPreviewImages] = useState({
+    plantImage: imagePreview,
+    plantImageForCard: imagePreview,
+    plantSecondImage: imagePreview,
+    plantThirdImage: imagePreview
+  });
+
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      navigate('/adminLogin'); // Redirect to login page if not authenticated
+      navigate('/adminLogin');
     }
   }, [navigate]);
 
-  // Fetch product details if editing
   useEffect(() => {
     if (location.state && location.state.id) {
       const productId = location.state.id;
@@ -55,7 +62,6 @@ export default function ProductAdding() {
     }
   }, [location.state]);
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAdminData({
@@ -64,16 +70,20 @@ export default function ProductAdding() {
     });
   };
 
-  // Handle image input changes
   const handleImageChange = (e) => {
     const { name, files } = e.target;
-    setImages({
-      ...images,
-      [name]: files[0]
-    });
+    if (files[0]) {
+      setImages({
+        ...images,
+        [name]: files[0]
+      });
+      setPreviewImages({
+        ...previewImages,
+        [name]: URL.createObjectURL(files[0])
+      });
+    }
   };
 
-  // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,31 +99,23 @@ export default function ProductAdding() {
     });
 
     try {
-      // Get the JWT token from localStorage
       const token = localStorage.getItem('authToken');
-
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}` // Add JWT token in Authorization header
+          'Authorization': `Bearer ${token}`
         }
       };
 
       if (location.state && location.state.id) {
-        // Edit mode: update the product
         const productId = location.state.id;
-        console.log('Updating product:', productId);
         const response = await axios.put(`${process.env.REACT_APP_BASE_URL}/updateproducts/${productId}`, formData, config);
-        console.log('Product updated:', response.data);
-        alert('Product updated successfully!');
+        toast.success('Product updated successfully!');
       } else {
-        // Add mode: create a new product
         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/createproduct`, formData, config);
-        console.log('Product created:', response.data);
-        alert('Product created successfully!');
+        toast.success('Product created successfully!');
       }
 
-      // Reset form after successful submission
       setAdminData({
         plantName: '',
         plantSmallDescription: '',
@@ -128,24 +130,27 @@ export default function ProductAdding() {
         plantSecondImage: null,
         plantThirdImage: null
       });
+      setPreviewImages({
+        plantImage: imagePreview,
+        plantImageForCard: imagePreview,
+        plantSecondImage: imagePreview,
+        plantThirdImage: imagePreview
+      });
 
-      navigate("/"); // Redirect after successful form submission
-
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        // Invalid or expired token
-        console.error('Token invalid or expired. Redirecting to login.');
-        localStorage.removeItem('authToken'); // Remove token
-        navigate('/adminLogin'); // Redirect to login
+        localStorage.removeItem('authToken');
+        navigate('/adminLogin');
       } else {
-        console.error('Error creating/updating product:', error);
-        alert('Error creating/updating product. Please try again.');
+        toast.error('Error creating/updating product. Please try again.');
       }
     }
   };
 
   return (
     <div className='admin-product-adding-page'>
+      <ToastContainer />
       <div className="product-adding-header">
         <AdminHeader />
       </div>
@@ -175,60 +180,27 @@ export default function ProductAdding() {
         </div>
         <span className='upload-pictures-text'>Upload Pictures</span>
         <div className="image-upload-section">
-          <div className="file-access-parent-div">
-            <label className="file-access-div">
-              <input
-                required
-                className="file-selector-input"
-                type="file"
-                name="plantImage"
-                onChange={handleImageChange}
-              />
-              <img src={imagePreview} alt="" />
-            </label>
-            <span className="image-uploading-button-specifiers">Main Image <span style={{ color: "red" }}>*</span> </span>
-          </div>
-          <div className="file-access-parent-div">
-            <label className="file-access-div">
-              <input
-                required
-                className="file-selector-input"
-                type="file"
-                name="plantImageForCard"
-                onChange={handleImageChange}
-              />
-              <img src={imagePreview} alt="" />
-            </label>
-            <span className="image-uploading-button-specifiers">Image for Card  <span style={{ color: "red" }}>*</span></span>
-          </div>
-          <div className="file-access-parent-div">
-            <label className="file-access-div">
-              <input
-                required
-                className="file-selector-input"
-                type="file"
-                name="plantSecondImage"
-                onChange={handleImageChange}
-              />
-              <img src={imagePreview} alt="" />
-            </label>
-            <span className="image-uploading-button-specifiers">Second Image  <span style={{ color: "red" }}>*</span> </span>
-          </div>
-          <div className="file-access-parent-div">
-            <label className="file-access-div">
-              <input
-                className="file-selector-input"
-                type="file"
-                name="plantThirdImage"
-                onChange={handleImageChange}
-              />
-              <img src={imagePreview} alt="" />
-            </label>
-            <span className="image-uploading-button-specifiers">Third Image  </span>
-          </div>
+          {['plantImage', 'plantImageForCard', 'plantSecondImage', 'plantThirdImage'].map((imageKey, index) => (
+            <div key={index} className="file-access-parent-div">
+              <label className="file-access-div">
+                <input
+                  required={imageKey !== 'plantThirdImage'}
+                  className="file-selector-input"
+                  type="file"
+                  name={imageKey}
+                  onChange={handleImageChange}
+                />
+                <img src={previewImages[imageKey]} alt="" />
+              </label>
+              <span className="image-uploading-button-specifiers">
+                {imageKey === 'plantImage' ? "Main Image" : imageKey === 'plantImageForCard' ? "Image for Card" : imageKey === 'plantSecondImage' ? "Second Image" : "Third Image"}
+                {imageKey !== 'plantThirdImage' && <span style={{ color: "red" }}>*</span>}
+              </span>
+            </div>
+          ))}
         </div>
-        <div className="form-submit-button">
-          <button type="submit" className="product-adding-button">
+        <div>
+          <button type="submit" className="product-adding-confirm-button">
             {location.state && location.state.id ? "Update Product" : "Create Product"}
           </button>
         </div>
