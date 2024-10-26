@@ -107,7 +107,7 @@ export default function Contact() {
                 </div>
 
                 <div className='contactLeftIconDiv'>
-                    <img src={igIcon} alt='igIcon'/>
+                    // <img src={igIcon} alt='igIcon'/>
                     {/* <img src={discordIcon} alt='discordIcon'/>
                     <img src={discordIcon} alt='discordIcon'/> */}
                 </div>
