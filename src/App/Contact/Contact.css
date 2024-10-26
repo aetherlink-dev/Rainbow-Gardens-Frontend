@@ -68,12 +68,14 @@
     width: 21.94vw;
     min-height: 26.667vh;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .contactLeftContent{
     display: flex;
+    width: 100%;
     gap: 1.5vw;
 }
 
@@ -238,18 +240,16 @@
         width: unset;
         justify-content: unset;
         min-height: unset;
-        padding: 4dvh 0;
+        padding: 2dvh 0;
         gap: 3dvh;
     }
 
     .contactLeftContent {
         align-items: center;
     }
-    
     .contactLeftContent {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
-
     .contactLeftIconDiv {
         gap: 5dvw;
     }
