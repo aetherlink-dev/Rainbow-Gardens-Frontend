@@ -92,13 +92,13 @@
 
 .productTitle > span {
   font-family: "Lufga Bold";
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #000000;
 }
 
 .productSmallDescriptionDiv > span {
   font-family: "Lufga Bold";
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #666666;
 }
 
@@ -132,7 +132,7 @@
 
 .productCategoryDiv > span {
   font-family: "Lufga Semibold";
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #000000;
   display: flex;
   align-items: center;
@@ -154,6 +154,7 @@
   border: none;
   border-radius: 1.953vw;
   font-family: "Lufga Bold";
+  font-size: 1.5rem;
   color: #000000;
 }
 
@@ -163,7 +164,7 @@
 
 .productLongDescriptionDiv > span {
   font-family: "Lufga Bold";
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #666666;
 }
 
@@ -183,6 +184,7 @@
   border: none;
   border-radius: 1.953vw;
   align-items: center;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
@@ -310,4 +312,5 @@
 
 /* For larger mobiles */
 
-
+@media screen and (width<=600px) {
+}
